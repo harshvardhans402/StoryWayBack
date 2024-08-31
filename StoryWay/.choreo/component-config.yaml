@@ -52,7 +52,7 @@ network:
   cors:
     enabled: true
     allowedOrigins:
-      - "*"
+      - "*" # Update with specific origins in production
     allowedMethods:
       - GET
       - POST
@@ -69,3 +69,37 @@ monitoring:
       metric: cpu_usage
       threshold: 80
       action: scale_up
+
+# Added Configuration from Suggestions
+# Build Permissions
+build:
+  permissions:
+    executableScripts:
+      - mvnw
+
+# CI/CD Configuration
+cicd:
+  steps:
+    - name: Set Executable Permissions
+      command: chmod +x mvnw
+    - name: Build Application
+      command: ./mvnw clean package -DskipTests
+
+# Error Handling
+errorHandling:
+  retry: 3
+  timeout: 30s
+  logLevel: error
+
+# Security Settings
+security:
+  https: false # Change to true if SSL is configured
+  xssProtection: enabled
+  contentSecurityPolicy: "default-src 'self'"
+
+# Alerts Configuration
+alerts:
+  - type: email
+    recipients:
+      - admin@storyway.com
+    onFailure: true
