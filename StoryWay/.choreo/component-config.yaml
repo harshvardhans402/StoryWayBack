@@ -83,7 +83,7 @@ cicd:
     - name: Set Executable Permissions
       command: chmod +x mvnw
     - name: Build Application
-      command: ./mvnw clean package -DskipTests
+      command: mvnw clean package -DskipTests
 
 # Error Handling
 errorHandling:
