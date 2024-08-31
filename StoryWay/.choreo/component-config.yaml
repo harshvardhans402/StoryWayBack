@@ -6,7 +6,7 @@ service:
 
 # Deployment Configuration
 deployment:
-  environment: production # Set to 'development' or 'staging' as needed
+  environment: production
   replicas: 2
   autoscaling:
     enabled: true
@@ -23,7 +23,7 @@ deployment:
 # Authentication Configuration
 auth:
   type: jwt
-  secret: my-secret-key # Update with your actual secret key
+  secret: my-secret-key
   issuer: storyway-issuer
   audience: storyway-audience
 
@@ -41,18 +41,18 @@ env:
 
 # Logging Configuration
 logging:
-  level: info # or debug, warn, error based on the environment
-  format: json # or text
+  level: info
+  format: json
   output: stdout
 
 # Networking Configuration
 network:
   port: 8080
-  protocol: http # Change to https if using SSL
+  protocol: http
   cors:
     enabled: true
     allowedOrigins:
-      - "*" # Update with specific origins in production
+      - "*"
     allowedMethods:
       - GET
       - POST
@@ -63,14 +63,13 @@ network:
 # Monitoring and Alerts
 monitoring:
   enabled: true
-  endpoint: "/actuator/metrics" # Adjust based on your Spring Boot actuator setup
+  endpoint: "/actuator/metrics"
   alerts:
     - type: threshold
       metric: cpu_usage
       threshold: 80
       action: scale_up
 
-# Added Configuration from Suggestions
 # Build Permissions
 build:
   permissions:
@@ -83,7 +82,7 @@ cicd:
     - name: Set Executable Permissions
       command: chmod +x mvnw
     - name: Build Application
-      command: mvnw clean package -DskipTests
+      command: ./mvnw clean package -DskipTests
 
 # Error Handling
 errorHandling:
@@ -93,7 +92,7 @@ errorHandling:
 
 # Security Settings
 security:
-  https: false # Change to true if SSL is configured
+  https: false
   xssProtection: enabled
   contentSecurityPolicy: "default-src 'self'"
 
